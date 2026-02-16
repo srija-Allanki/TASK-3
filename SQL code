@@ -1,0 +1,46 @@
+select * from flipkart_sales_data;
+
+select product_name,price_INR 
+from flipkart_sales_data
+where Category = 'Beauty';
+
+
+SELECT *
+FROM flipkart_sales_data
+WHERE Category = 'Electronics';
+
+SELECT Product_Name,price_INR
+FROM flipkart_sales_data
+ORDER BY Total_Sales_INR DESC;
+
+select Category,sum(total_sales_INR) AS total_sales
+from flipkart_sales_data
+group by Category;
+
+
+select Product_Name,Total_SAles_INR
+From flipkart_sales_data
+WHERE Total_Sales_INR >
+    (select AVG(Total_sales_INR)
+     from flipkart_sales_data);
+
+
+SELECT SUM(Total_Sales_INR) AS revenue
+FROM flipkart_sales_data;
+
+SELECT Region,
+       SUM(Profit_INR) AS profit
+FROM flipkart_sales_data
+GROUP BY Region;
+
+CREATE VIEW monthly_sales AS
+SELECT Month,
+       SUM(Total_Sales_INR) AS total_sales
+FROM flipkart_sales_data
+GROUP BY Month;
+
+SELECT * FROM monthly_sales;
+
+CREATE INDEX idx_category
+ON flipkart_sales_data(Category);
+
